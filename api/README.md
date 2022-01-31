@@ -101,7 +101,7 @@ fetch(" https://stockfinch.herokuapp.com/api/stock_news", opts)
     GET https://stockfinch.herokuapp.com/api/stock_news?limit=5 
     Returns the first page with 5 news items
 
-2) GET api/news_archive - News Archive of a User
+2) GET /api/news_archive - News Archive of a User
 Structure:
     data - list of news archive items
     has_prev - boolean - previous page available?
@@ -117,7 +117,7 @@ Structure:
     GET https://stockfinch.herokuapp.com/api/news_archive?limit=5 
     Returns the first page with 5 news items
 
-3) POST api/news_archive - Add a news article to a users news archive
+3) POST /api/news_archive - Add a news article to a users news archive
 
     Request Body - news_id
     Eg: POST https://stockfinch.herokuapp.com/api/news_archive
@@ -131,7 +131,7 @@ Structure:
     Adds news article with id 58 to the user's news_archive
 
 
-4) DELETE api/news_archive - Remove a news article from a  users news archive
+4) DELETE /api/news_archive - Remove a news article from a  users news archive
 
     Request Body - news_id
     Eg: DELETE https://stockfinch.herokuapp.com/api/news_archive
