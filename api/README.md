@@ -5,10 +5,8 @@
 Reference - https://www.youtube.com/watch?v=8-W2O_R95Pk
 
 There are two endpoints for authentication: 
-1) POST /api/register - For User Signup
-2) POST /api/token - For User Login
 
-1) POST /api/register
+1) POST /api/register - For User Signup
 
     Requires firstname, lastname, email, password in request body
 
@@ -35,7 +33,7 @@ There are two endpoints for authentication:
     .then()
     ```
 
-2) POST /api/token
+2) POST /api/token - For User Login
 
     Requires email and password in request body
 
