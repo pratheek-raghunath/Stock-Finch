@@ -69,7 +69,7 @@ There are two endpoints for authentication:
 
 All requests to the api need to contain the jwt access token.
 This should be placed in the request headers.
-Eg: Authorization: bearer <access_token>
+Eg: Authorization: Bearer <access_token>
 
 Eg request:
 
