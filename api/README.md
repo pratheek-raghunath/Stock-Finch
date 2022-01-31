@@ -17,6 +17,7 @@ There are two endpoints for authentication:
 
     Eg request:
 
+    ```
     const opts = {
         method: 'POST',
         headers: {
@@ -32,6 +33,7 @@ There are two endpoints for authentication:
 
     fetch(" https://stockfinch.herokuapp.com/api/register", opts)
     .then()
+    ```
 
 2) POST /api/token
 
@@ -45,6 +47,7 @@ There are two endpoints for authentication:
 
     Eg request:
 
+    ```
     const opts = {
         method: 'POST',
         headers: {
@@ -58,7 +61,7 @@ There are two endpoints for authentication:
 
     fetch(" https://stockfinch.herokuapp.com/api/token", opts)
     .then()
-
+    ```
 
     The access token has to be stored in the react application context and the session storage/local storage for future api requests
 
@@ -70,6 +73,7 @@ Eg: Authorization: bearer <access_token>
 
 Eg request:
 
+```
 const opts = {
     headers: {
         'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY0MzY0OTMzMSwianRpIjoiZThhNDhiODAtYWEyNS00ZjJkLWJlYjgtMzEzN2U0MzdhNjcxIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjQzNjQ5MzMxLCJleHAiOjE2NDM2NTAyMzF9.-c7kkWEFP3inPI0itIL-dcbMKnjtjy4khKlWqdelyV4'
@@ -78,6 +82,7 @@ const opts = {
 
 fetch(" https://stockfinch.herokuapp.com/api/stock_news", opts)
 .then()
+```
 
 1) GET /api/stock_news 
 
