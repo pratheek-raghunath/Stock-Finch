@@ -21,6 +21,7 @@ dbcon = psycopg2.connect(user=DB_USER, password=DB_PASSWORD,
 app = Flask(__name__)
 CORS(app)
 
+#todo - increase token expiry time
 app.config["JWT_SECRET_KEY"] = "gr4rgr#21ff5frfuii"  
 jwt = JWTManager(app)
 
@@ -38,7 +39,7 @@ def register():
 
     #Handle missing first name or last name or email or password
     if first_name is None or last_name is None or email is None or password is None:
-        return {"error": "First Name or Last Name or Email or Password missing in body"}, 401
+        return {"error": "First Name or Last Name or Email or Password missing in body"}, 400
 
     cur = dbcon.cursor()
 
@@ -49,7 +50,7 @@ def register():
     user = cur.fetchone()
 
     if user is not None:
-        return {"error": "user with email already exists"}, 401
+        return {"error": "user with email already exists"}, 400
     
     #Create a new user - todo store hashed password
     SQL = '''
@@ -60,6 +61,7 @@ def register():
     cur.execute(SQL, params)
 
     cur.close()
+    dbcon.commit()
 
     return {}, 204
 
@@ -70,7 +72,7 @@ def create_token():
 
     #Handle empty email or password
     if email is None or password is None:
-        return {"error": "Email or Password missing in body"}, 401
+        return {"error": "Email or Password missing in body"}, 400
 
     #Handle valid user check - todo use hashed passwords
     cur = dbcon.cursor()
@@ -85,7 +87,7 @@ def create_token():
     cur.close()
 
     if user is None:
-        return {"error": "Invalid credentials! User doesn't exist"}, 401
+        return {"error": "Invalid credentials! User doesn't exist"}, 400
 
     access_token = create_access_token(identity=user[0])
     return jsonify(access_token=access_token) 
@@ -140,7 +142,7 @@ def get_stock_news():
         "data": stock_news_list,
     }
     
-    if offset > 0:
+    if (offset - limit) > 0:
         stock_news_dict['has_prev'] = True
         stock_news_dict['prev'] = BASE_URI + '/api/stock_news?offset=' + str(offset - limit) + '&limit=' + str(limit)
 
@@ -150,7 +152,143 @@ def get_stock_news():
 
     return stock_news_dict
 
+@app.route('/api/news_archive', methods=['GET'])
+@jwt_required()
+def get_news_archive():
+    app_user_id = get_jwt_identity()
+    
+    offset = request.args.get('offset')
+    limit = request.args.get('limit')
+    
+    if not offset:
+        offset = 0
+    else:
+        try:
+            offset = int(offset)
+        except:
+            return {"error": "invalid offset"}, 400
 
+    if not limit:
+        limit = 10
+    else:
+        try:
+            limit = int(limit)
+        except:
+            return {"error": "invalid limit"}, 400
+
+    cur = dbcon.cursor(cursor_factory = psycopg2.extras.RealDictCursor)
+
+    SQL = '''
+        SELECT COUNT(*) AS c
+        FROM stock_news s, news_archive n
+        WHERE s.id = n.news_id AND n.app_user_id=%s
+    '''
+    params = (app_user_id,)
+
+    cur.execute(SQL, params)
+    count = cur.fetchone()['c']
+
+    SQL = '''
+        SELECT s.*
+        FROM stock_news s, news_archive n
+        WHERE s.id = n.news_id AND n.app_user_id=%s
+        ORDER BY s.publish_date DESC
+        OFFSET %s
+        LIMIT %s
+    '''
+    params = (app_user_id, offset, limit)
+
+    cur.execute(SQL, params)
+    news_archive_list = cur.fetchall()
+    cur.close()
+
+    news_archive_dict = {
+        "has_prev": False,
+        "prev": None,
+        "has_next": False,
+        "next": None,
+        "data": news_archive_list,
+    }
+    
+    if (offset - limit) > 0:
+        news_archive_dict['has_prev'] = True
+        news_archive_dict['prev'] = BASE_URI + '/api/stock_news?offset=' + str(offset - limit) + '&limit=' + str(limit)
+
+    if (offset + limit) < count:
+        news_archive_dict['has_next'] = True
+        news_archive_dict['next'] = BASE_URI + '/api/stock_news?offset=' + str(offset + limit) + '&limit=' + str(limit)
+
+    return news_archive_dict
+
+@app.route('/api/news_archive', methods=['POST'])
+@jwt_required()
+def add_news_archive():
+    app_user_id = get_jwt_identity()
+
+    news_id = request.json.get('news_id', None)
+
+    if news_id is None:
+        return {"error": "News Id missing in body"}, 400
+
+    cur = dbcon.cursor()
+
+    SQL = '''
+        SELECT * FROM stock_news WHERE id=%s
+    '''
+    params=(news_id,)
+    cur.execute(SQL, params)
+
+    news = cur.fetchone()
+
+    if news is None:
+        return {"error": "News Id doesn't exist"}, 400
+
+    SQL = '''
+        INSERT INTO news_archive(app_user_id, news_id)
+        VALUES(%s, %s)
+    '''
+    params=(app_user_id, news_id)
+    cur.execute(SQL, params)
+
+    cur.close()
+    dbcon.commit()
+
+    return {}, 204
+
+@app.route('/api/news_archive', methods=['DELETE'])
+@jwt_required()
+def remove_news_archive():
+    app_user_id = get_jwt_identity()
+
+    news_id = request.json.get('news_id', None)
+
+    if news_id is None:
+        return {"error": "News Id missing in body"}, 400
+
+    cur = dbcon.cursor()
+
+    SQL = '''
+        SELECT * FROM news_archive WHERE news_id=%s AND app_user_id=%s
+    '''
+    params=(news_id,app_user_id)
+    cur.execute(SQL, params)
+
+    news_archive_item = cur.fetchone()
+
+    if news_archive_item is None:
+        return {"error": "News Item not in archive"}, 400
+
+    SQL = '''
+        DELETE FROM news_archive
+        WHERE id=%s
+    '''
+    params=(news_archive_item[0],)
+    cur.execute(SQL, params)
+
+    cur.close()
+    dbcon.commit()
+
+    return {}, 204
 
 if __name__ == "__main__":
     app.run(debug=True)
