@@ -41,9 +41,11 @@ There are two endpoints for authentication:
 
     Returns 401 with appropriate error message if: request body is empty or incomplete, login credentials incorrect
     Returns the jwt access token if user was successfully authenticated- 
-    Eg: {
-    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY0MzY0OTMzMSwianRpIjoiZThhNDhiODAtYWEyNS00ZjJkLWJlYjgtMzEzN2U0MzdhNjcxIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjQzNjQ5MzMxLCJleHAiOjE2NDM2NTAyMzF9.-c7kkWEFP3inPI0itIL-dcbMKnjtjy4khKlWqdelyV4"
-}
+    Eg: 
+    ```
+    {
+    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY0MzY0OTMzMSwianRpIjoiZThhNDhiODAtYWEyNS00ZjJkLWJlYjgtMzEzN2U0MzdhNjcxIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjQzNjQ5MzMxLCJleHAiOjE2NDM2NTAyMzF9.-c7kkWEFP3inPI0itIL-dcbMKnjtjy4khKlWqdelyV4" }
+    ```
 
     Eg request:
 
