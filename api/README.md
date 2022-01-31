@@ -10,7 +10,7 @@ There are two endpoints for authentication:
 
     Requires firstname, lastname, email, password in request body
 
-    Returns 401 with appropriate error message if: request body is empty or incomplete, user with email already exists
+    Returns 400 with appropriate error message if: request body is empty or incomplete, user with email already exists
     Returns empty 201 if user was successfully registered
 
     Eg request:
@@ -37,7 +37,7 @@ There are two endpoints for authentication:
 
     Requires email and password in request body
 
-    Returns 401 with appropriate error message if: request body is empty or incomplete, login credentials incorrect
+    Returns 400 with appropriate error message if: request body is empty or incomplete, login credentials incorrect
     Returns the jwt access token if user was successfully authenticated- 
     Eg: 
     ```
