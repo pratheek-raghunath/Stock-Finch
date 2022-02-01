@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token, jwt_required, JWTManager, get_jwt_identity
 import psycopg2
@@ -17,7 +17,7 @@ DB_HOST = 'john.db.elephantsql.com'
 dbcon = psycopg2.connect(user=DB_USER, password=DB_PASSWORD,
                             database=POSTGRES_DB, host=DB_HOST)
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="build/static", template_folder="build")
 CORS(app)
 
 #todo - increase token expiry time
@@ -26,7 +26,7 @@ jwt = JWTManager(app)
 
 @app.route("/")
 def index():
-    return 'index'
+    return render_template('index.html')
 
 #Authentication
 @app.route('/api/register', methods=['POST'])
