@@ -1,6 +1,5 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from itsdangerous import json
 from flask_jwt_extended import create_access_token, jwt_required, JWTManager, get_jwt_identity
 import psycopg2
 import psycopg2.extras
@@ -242,6 +241,17 @@ def add_news_archive():
 
     if news is None:
         return {"error": "News Id doesn't exist"}, 400
+
+    SQL = '''
+        SELECT * FROM news_archive WHERE news_id=%s AND app_user_id=%s
+    '''
+    params=(news_id, app_user_id)
+    cur.execute(SQL, params)
+
+    news_archive_item = cur.fetchone()
+
+    if news_archive_item is None:
+        return {"error": "News Item already in user's archive"}, 400
 
     SQL = '''
         INSERT INTO news_archive(app_user_id, news_id)
