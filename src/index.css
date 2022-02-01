@@ -1,0 +1,175 @@
+body{
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.indximg{
+  width: 7rem;
+  float: left;
+  margin-right: 15px;
+}
+a{
+  text-decoration: none;
+}
+
+h2{
+  /* font-family:'Roboto',sans-serif; */
+  margin-bottom: 0;
+}
+
+.newsdiv{
+  width:50%;
+  margin :130px auto 130px auto;
+  /* text-align: left; */
+  line-height: 2;
+  
+  
+}
+
+
+p{
+  margin-top: 0;
+  line-height: 1;
+  font-size: larger;
+}
+.newssection{
+  margin: 15px;
+  padding: 10px;
+  width: 700px;
+  margin: 15px auto;
+  border: .2mm solid #707070;
+  border-radius: 6px;
+  
+}
+.newssection img{
+  width: 120px;
+  /* height: 100px; */
+  float: left;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+
+.newssection:hover{
+
+  box-shadow: 0px 0px 15px  rgba(0,0,0,0.3);
+  
+}
+
+.nav-bar {
+  padding: 20px 50px;
+  background-color: #1B2356;
+  margin: 0;
+  margin-bottom: 30px;
+}
+.nav-bar h1{
+  margin: 0;
+}
+.logo-image{
+  width: 350px;
+  display: inline-block;
+}
+.footer
+{
+  margin-top: 30px;
+  background-color:#1B2356; 
+  
+
+
+}
+.footer h1{
+  margin: 0;
+}
+.vector-top-bg{
+  text-align: center;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 30px;
+}
+.para-top{
+font-size: 2rem;
+margin-bottom: 10px;
+margin-top: 40px;
+}
+
+a{
+  color: black;
+  text-decoration: none;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+a:hover{
+  color:#4179BD;
+}
+.newspage{
+  margin: 40px 80px;
+}
+.headline{
+  font-size: 2.4rem;
+  margin: 30px 0;
+
+}
+.news-para{
+  margin: 20px 0;
+  
+ font-size: 1.4rem;
+ line-height: 2rem;
+ padding: 10px;
+}
+.newspage-img{
+  display: block;
+  width: 550px;
+  margin: 50px auto;}
+
+.footer-section{
+  padding: 30px;
+  text-align: center;
+
+}
+.icon {
+  color: #8EC5FC;
+  padding: 10px 20px;
+  cursor: pointer;
+  
+}
+.icon:hover{
+  color: #1c8bfa;
+}
+.login-btn{
+ float: right;
+}
+.loginpage{
+  display:block;
+  align-items: center;
+  text-align: center;
+  margin: 13% 0;
+  width: 300px;
+  margin: 8% auto;
+}
+
+
+.submit-btn{
+  margin: 10px;
+
+}
+.login-header{
+  font-size: 30px;
+  line-height: 1.2;
+  text-transform: uppercase;
+  text-align: center;
+  width: 100%;
+  display: block;
+  margin-bottom: 35px;
+}
+.signup{
+  margin: 45px auto;
+  
+}
+.headlineout{
+  font-size: 1.4rem;
+  padding: 15px;
+  
+}
+.pagebtn{
+  padding:2px 10px;
+  margin: 0 10px;
+  
+}
