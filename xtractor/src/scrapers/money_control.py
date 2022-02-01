@@ -27,6 +27,9 @@ class MoneyControl(BaseExtractor):
             if url:
                 if url.startswith('https://www.moneycontrol.com/news/photos'):
                     continue
+                
+                if url.startswith('https://www.moneycontrol.com/news/business/technicals'):
+                    continue
 
                 news_links.append(url)
 
