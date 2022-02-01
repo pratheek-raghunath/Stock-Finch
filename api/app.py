@@ -94,7 +94,6 @@ def create_token():
 
 #Data
 @app.route("/api/stock_news")
-@jwt_required()
 def get_stock_news():
     offset = request.args.get('offset')
     limit = request.args.get('limit')
@@ -141,7 +140,7 @@ def get_stock_news():
         "data": stock_news_list,
     }
     
-    if (offset - limit) > 0:
+    if (offset - limit) >= 0:
         stock_news_dict['has_prev'] = True
         stock_news_dict['prev'] = BASE_URI + '/api/stock_news?offset=' + str(offset - limit) + '&limit=' + str(limit)
 
@@ -150,6 +149,23 @@ def get_stock_news():
         stock_news_dict['next'] = BASE_URI + '/api/stock_news?offset=' + str(offset + limit) + '&limit=' + str(limit)
 
     return stock_news_dict
+
+@app.route('/api/stock_news/<int:id>')
+def get_stock_news_item(id):
+    cur = dbcon.cursor(cursor_factory = psycopg2.extras.RealDictCursor)
+
+    SQL = '''
+        SELECT * FROM stock_news WHERE id=%s
+    '''
+    params = (id,)
+    cur.execute(SQL, params)
+    stock_news_item = cur.fetchone()
+    cur.close()
+
+    if not stock_news_item:
+        return {"error": "Stock news item doesnt exist"}, 400
+    
+    return stock_news_item
 
 @app.route('/api/news_archive', methods=['GET'])
 @jwt_required()
@@ -209,7 +225,7 @@ def get_news_archive():
         "data": news_archive_list,
     }
     
-    if (offset - limit) > 0:
+    if (offset - limit) >= 0:
         news_archive_dict['has_prev'] = True
         news_archive_dict['prev'] = BASE_URI + '/api/stock_news?offset=' + str(offset - limit) + '&limit=' + str(limit)
 
