@@ -32,13 +32,14 @@ def index():
 @app.route('/api/register', methods=['POST'])
 def register():
     first_name = request.json.get('first_name', None)
-    last_name = request.json.get('password', None)
-    email = request.json.get('password', None)
+    last_name = request.json.get('last_name', None)
+    email = request.json.get('email', None)
     password = request.json.get('password', None)
+    phone = request.json.get('phone', None)
 
     #Handle missing first name or last name or email or password
-    if first_name is None or last_name is None or email is None or password is None:
-        return {"error": "First Name or Last Name or Email or Password missing in body"}, 400
+    if first_name is None or last_name is None or email is None or password is None or phone is None:
+        return {"error": "First Name or Last Name or Email or Password or Phone missing in body"}, 400
 
     cur = dbcon.cursor()
 
@@ -53,10 +54,10 @@ def register():
     
     #Create a new user - todo store hashed password
     SQL = '''
-        INSERT INTO app_user(first_name, last_name, email, password)
-        VALUES(%s, %s, %s, %s)
+        INSERT INTO app_user(first_name, last_name, email, password, phone)
+        VALUES(%s, %s, %s, %s, %s)
     '''
-    params = (first_name, last_name, email, password)
+    params = (first_name, last_name, email, password, phone)
     cur.execute(SQL, params)
 
     cur.close()
