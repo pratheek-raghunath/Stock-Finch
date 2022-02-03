@@ -8,7 +8,7 @@ There are two endpoints for authentication:
 
 1) POST /api/register - For User Signup
 
-    Requires firstname, lastname, email, password in request body
+    Requires firstname, lastname, email, password, phone in request body
 
     Returns 400 with appropriate error message if: request body is empty or incomplete, user with email already exists
     Returns empty 201 if user was successfully registered
@@ -25,7 +25,8 @@ There are two endpoints for authentication:
             first_name: 'test',
             last_name: 'test, 
             email: 'test',
-            password: 'test'
+            password: 'test',
+            phone: '9874312345'
         })
     };
 
