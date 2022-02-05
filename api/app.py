@@ -4,6 +4,7 @@ from flask_jwt_extended import create_access_token, jwt_required, JWTManager, ge
 import psycopg2
 import psycopg2.extras
 import os 
+from datetime import timedelta
 
 if os.environ.get('BASE_URI'):
     BASE_URI = os.environ.get('BASE_URI')
@@ -22,6 +23,7 @@ CORS(app)
 
 #todo - increase token expiry time
 app.config["JWT_SECRET_KEY"] = "gr4rgr#21ff5frfuii"  
+app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
 jwt = JWTManager(app)
 
 @app.route("/")
@@ -90,11 +92,12 @@ def create_token():
         return {"error": "Invalid credentials! User doesn't exist"}, 400
 
     access_token = create_access_token(identity=user[0])
-    return jsonify(access_token=access_token) 
+    return jsonify(access_token=access_token, first_name=user[1]) 
 
 
 #Data
 @app.route("/api/stock_news")
+@jwt_required()
 def get_stock_news():
     offset = request.args.get('offset')
     limit = request.args.get('limit')
@@ -131,7 +134,7 @@ def get_stock_news():
 
     cur.execute(SQL, params)
     stock_news_list = cur.fetchall()
-    cur.close()
+    
 
     stock_news_dict = {
         "has_prev": False,
@@ -149,9 +152,29 @@ def get_stock_news():
         stock_news_dict['has_next'] = True
         stock_news_dict['next'] = BASE_URI + '/api/stock_news?offset=' + str(offset + limit) + '&limit=' + str(limit)
 
+    app_user_id = get_jwt_identity()
+
+    for i in range(len(stock_news_dict['data'])):
+        news_id = stock_news_dict['data'][i]['id']
+
+        SQL = '''
+            SELECT * FROM news_archive WHERE news_id=%s AND app_user_id=%s
+        '''
+        params = (news_id, app_user_id)
+        cur.execute(SQL, params)
+        news_archive_item = cur.fetchone()
+
+        if news_archive_item:
+            stock_news_dict['data'][i]['is_archived'] = True
+        else:
+            stock_news_dict['data'][i]['is_archived'] = False
+
+    cur.close()
+
     return stock_news_dict
 
 @app.route('/api/stock_news/<int:id>')
+@jwt_required()
 def get_stock_news_item(id):
     cur = dbcon.cursor(cursor_factory = psycopg2.extras.RealDictCursor)
 
@@ -161,11 +184,26 @@ def get_stock_news_item(id):
     params = (id,)
     cur.execute(SQL, params)
     stock_news_item = cur.fetchone()
-    cur.close()
 
     if not stock_news_item:
         return {"error": "Stock news item doesnt exist"}, 400
-    
+
+    app_user_id = get_jwt_identity()
+
+    SQL = '''
+            SELECT * FROM news_archive WHERE news_id=%s AND app_user_id=%s
+        '''
+    params = (id, app_user_id)
+    cur.execute(SQL, params)
+    news_archive_item = cur.fetchone()
+
+    if news_archive_item:
+        stock_news_item['is_archived'] = True
+    else:
+        stock_news_item['is_archived'] = False
+
+    cur.close()
+
     return stock_news_item
 
 @app.route('/api/news_archive', methods=['GET'])
@@ -267,7 +305,7 @@ def add_news_archive():
 
     news_archive_item = cur.fetchone()
 
-    if news_archive_item is None:
+    if news_archive_item is not None:
         return {"error": "News Item already in user's archive"}, 400
 
     SQL = '''

@@ -39,11 +39,13 @@ There are two endpoints for authentication:
     Requires email and password in request body
 
     Returns 400 with appropriate error message if: request body is empty or incomplete, login credentials incorrect
-    Returns the jwt access token if user was successfully authenticated- 
+    Returns the jwt access token and the first name of the user if user was successfully authenticated- 
     Eg: 
     ```
     {
-    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY0MzY0OTMzMSwianRpIjoiZThhNDhiODAtYWEyNS00ZjJkLWJlYjgtMzEzN2U0MzdhNjcxIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjQzNjQ5MzMxLCJleHAiOjE2NDM2NTAyMzF9.-c7kkWEFP3inPI0itIL-dcbMKnjtjy4khKlWqdelyV4" }
+        "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY0MzY0OTMzMSwianRpIjoiZThhNDhiODAtYWEyNS00ZjJkLWJlYjgtMzEzN2U0MzdhNjcxIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjQzNjQ5MzMxLCJleHAiOjE2NDM2NTAyMzF9.-c7kkWEFP3inPI0itIL-dcbMKnjtjy4khKlWqdelyV4", 
+        "first_name": "John"
+    }
     ```
 
     Eg request:
@@ -88,7 +90,7 @@ fetch(" https://stockfinch.herokuapp.com/api/stock_news", opts)
 1) GET /api/stock_news - Stock News
 
     Structure:
-    data - list of stock news items
+    data - list of stock news items (contains is_archived field which shows if user has archived news article)
     has_prev - boolean - previous page available?
     prev - url of previous page
     has_next - boolean - next page available?
@@ -144,3 +146,18 @@ Structure:
     ```
 
     REmoves news article with id 58 from the user's news_archive
+
+5) GET /api/stock_news/:id - Stock News Item
+
+    Fields:
+    created_at - timestamp of creation
+    description - news article contents
+    headline - news article headline
+    id - news article id
+    image_url - news article image url
+    is_archived - has user archived news article?
+    is_deleted - news article soft delete
+    news_link - link to news article
+    publish_date - date of publishing of news article
+    source - source of news article
+    updated_at - news article last updated timestamp
