@@ -5,8 +5,11 @@ import Nav from './components/Nav'
 import Footer from './components/Footer'
 import LoginPage from './components/LoginPage'
 import Registartion from './components/Registration'
+import Archive from './components/Archive'
+import AA from './components/AA'
 
 function App() {
+  
 
   return (
    
@@ -18,6 +21,9 @@ function App() {
         <Route path='/news/:id' element={<Newspage/>}/>
         <Route path='/login' element={<LoginPage/>}/>
         <Route path='/Sign-up' element={<Registartion/>}/>
+        <Route path='/archive' element={<Archive/>}/>
+        <Route path='/aa' element={<AA/>}/>
+
       </Routes>
       <Footer/>
     </Router>

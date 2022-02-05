@@ -4,6 +4,8 @@ import {useParams} from 'react-router-dom'
 
 const Newspage = ({newspage}) => {
     const params=useParams();
+    const token=sessionStorage.getItem('token')
+
     const [news,setNews]=useState([])
     useEffect(()=>{
         const getNews=async()=>{
@@ -15,8 +17,13 @@ const Newspage = ({newspage}) => {
     
       //fetch
       const fetchNews= async()=>{
+        const opts = {
+          headers: {
+              'Authorization': 'Bearer '+token
+          }
+      };
         const res =await fetch(
-          `https://stockfinch.herokuapp.com/api/stock_news/${params.id}`)
+          `https://stockfinch.herokuapp.com/api/stock_news/${params.id}`,opts)
           const news =await res.json()
     return news     
     }

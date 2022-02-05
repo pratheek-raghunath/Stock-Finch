@@ -42,11 +42,16 @@ p{
   
 }
 .newssection img{
-  width: 120px;
-  /* height: 100px; */
+  /* display: inline-block; */
+  max-height:70px;
+
+  max-width: 20%;
+  object-fit: contain;
+
   float: left;
-  padding: 15px;
+  padding: 2px 15px;
   border-radius: 10px;
+  margin: 0 20px;
 }
 
 
@@ -133,7 +138,7 @@ a:hover{
 .icon:hover{
   color: #1c8bfa;
 }
-.login-btn{
+.profile-btn{
  float: right;
 }
 .loginpage{
@@ -172,4 +177,17 @@ a:hover{
   padding:2px 10px;
   margin: 0 10px;
   
+}
+.signedinimg{
+  margin-top: 25px;
+  margin-bottom: 61px;
+  width: 200px;
+}
+.logh3{
+  margin-top: 100px;
+}
+.archivebtn{
+  float: right;
+  border: 0;
+  margin: 2px;
 }
