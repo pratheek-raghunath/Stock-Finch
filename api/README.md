@@ -150,14 +150,14 @@ Structure:
 5) GET /api/stock_news/:id - Stock News Item
 
     Fields:
-    created_at - timestamp of creation
-    description - news article contents
-    headline - news article headline
-    id - news article id
-    image_url - news article image url
-    is_archived - has user archived news article?
-    is_deleted - news article soft delete
-    news_link - link to news article
-    publish_date - date of publishing of news article
-    source - source of news article
-    updated_at - news article last updated timestamp
+    - created_at - timestamp of creation
+    - description - news article contents
+    - headline - news article headline
+    - id - news article id
+    - image_url - news article image url
+    - is_archived - has user archived news article?
+    - is_deleted - news article soft delete
+    - news_link - link to news article
+    - publish_date - date of publishing of news article
+    - source - source of news article
+    - updated_at - news article last updated timestamp
