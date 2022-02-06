@@ -1,13 +1,17 @@
 import {Link} from "react-router-dom"
 import { IoBookmark } from 'react-icons/io5';
 import { IoBookmarkOutline } from 'react-icons/io5';
-import { useState } from "react";
+import { useContext, useState } from "react";
+import {LoginContext} from './Context'
+
 
 
 const Newscard = ({ news}) => {
     const [archived ,setArchived] =useState(news.is_archived);
     const token=sessionStorage.getItem('token')
     console.log(news)
+    const {loggedIn,setloggedIn}=useContext(LoginContext)
+
 
     
     const removeArchive =(id)=>{

@@ -1,10 +1,15 @@
 import Newscard from './Newscard'
-import {useState,useEffect} from 'react'
+import {useState,useEffect, useContext} from 'react'
 import { useNavigate } from 'react-router-dom'
+
+import {LoginContext} from './Context'
+
 
 const Newsfeed = ( ) => {
 
     const [news,setNews]=useState({has_prev:false,has_next:false,prev:null,next:null,data:[]})
+    const {loggedIn,setloggedIn}=useContext(LoginContext)
+
     const token=sessionStorage.getItem('token')
     let navigate=useNavigate();
 
@@ -63,7 +68,7 @@ const nextPage =()=>{
 
     return (
         <div>
-             {token && token !=='' &&token !==undefined ?(
+             {loggedIn ?(
             <div>
                 <div className='vector-top-bg'>
                     <p className='para-top'>Stocks in News Today</p>

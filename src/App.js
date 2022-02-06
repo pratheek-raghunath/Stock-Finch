@@ -6,27 +6,32 @@ import Footer from './components/Footer'
 import LoginPage from './components/LoginPage'
 import Registartion from './components/Registration'
 import Archive from './components/Archive'
-import AA from './components/AA'
+import {LoginContext} from './components/Context'
+import { useEffect, useState } from 'react'
 
 function App() {
+  const [loggedIn,setloggedIn] =useState(false)
   
+  useEffect(() => {
+    const storedLoggedIn = (sessionStorage.getItem('storedLoggedIn'))
+    setloggedIn(storedLoggedIn)
+  }, [])
 
   return (
    
-
-    <Router>
-       <Nav/>
-      <Routes>
-        <Route path='/' element={<Newsfeed/>}/>
-        <Route path='/news/:id' element={<Newspage/>}/>
-        <Route path='/login' element={<LoginPage/>}/>
-        <Route path='/Sign-up' element={<Registartion/>}/>
-        <Route path='/archive' element={<Archive/>}/>
-        <Route path='/aa' element={<AA/>}/>
-
-      </Routes>
-      <Footer/>
-    </Router>
+    <LoginContext.Provider value={{loggedIn,setloggedIn}}>
+        <Router>
+          <Nav/>
+          <Routes>
+            <Route path='/' element={<Newsfeed/>}/>
+            <Route path='/news/:id' element={<Newspage/>}/>
+            <Route path='/login' element={<LoginPage/>}/>
+            <Route path='/Sign-up' element={<Registartion/>}/>
+            <Route path='/archive' element={<Archive/>}/>
+          </Routes>
+          <Footer/>
+        </Router>
+    </LoginContext.Provider>
     
   )
 

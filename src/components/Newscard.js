@@ -67,7 +67,6 @@ const Newscard = ({ news}) => {
              <h2 className="headlineout">{news.headline}</h2>
             </Link>
             </div>
-              {/* <IoBookmarkOutline onClick={()=>setNewsid(news.id) && addArchive} style={{ cursor:'pointer'}}/>  */}
             
            
         

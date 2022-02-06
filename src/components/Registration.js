@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'
+
 
 const Registration = () => {
   const [email ,setEmail] =useState("");
@@ -6,6 +8,8 @@ const Registration = () => {
   const [phonenumber,setPhone] =useState("");
   const [firstname ,setFname] =useState("");
   const [lastname ,setLname] =useState("");
+  let navigate=useNavigate();
+
 
   const handleclick = (e)=>{
     e.preventDefault();
@@ -25,6 +29,9 @@ const Registration = () => {
 };
 fetch("https://stockfinch.herokuapp.com/api/register", opts)
 .then(res => console.log(res))
+
+ navigate('/login')
+
 }
   return <section >
   <div className="mask d-flex align-items-center h-100 gradient-custom-3">

@@ -1,11 +1,14 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState ,useEffect} from 'react';
 import {Link} from "react-router-dom"
 import signedinimg from '../images/signedin.png'
 import { useNavigate } from 'react-router-dom'
+import {LoginContext} from './Context'
+
 
 
 
 const LoginPage = () => {
+  const {loggedIn,setloggedIn}=useContext(LoginContext)
   const [email ,setEmail] =useState("");
   const [password ,setPassword] =useState("");
   const token=sessionStorage.getItem('token')
@@ -26,9 +29,12 @@ const LoginPage = () => {
   };
     fetch('https://stockfinch.herokuapp.com/api/token',opts)
     .then(resp =>{
-      if(resp.status === 200) 
+      if(resp.status === 200)
       {
+        setloggedIn(true)
+      
         return resp.json();
+        
         
       }
       else alert('errrrrrruuuuurr');
@@ -36,20 +42,23 @@ const LoginPage = () => {
     .then(data =>{
       sessionStorage.setItem('token',data.access_token)
       sessionStorage.setItem('first_name',data.first_name)
+      sessionStorage.setItem('storedLoggedIn',data.loggedIn)
+
+      navigate('/')
+      // window.location.reload(false);
+
 
 
     })
-    .then(navigate('/'))
-    .catch(error => {
-      console.error('errrrrrrrooooooorrr',error);
-    })
+    
+    
 
   }
 
 
   return <div className='loginpage'>
              
-             {token && token !=='' &&token !==undefined ? (
+             {loggedIn ? (
              <div><h3 className='logh3'>You're Logged In</h3>
              <img className='signedinimg' src={signedinimg}></img>
              </div>
