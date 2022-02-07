@@ -43,7 +43,7 @@ fetch("https://stockfinch.herokuapp.com/api/register", opts)
           return resp.json();
           
         }
-        else alert('Error');
+        
       })
     }
 
