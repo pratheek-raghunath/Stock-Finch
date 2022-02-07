@@ -11,7 +11,7 @@ const Newspage = ({newspage}) => {
 
 
     const [news,setNews]=useState([])
-    const [archived ,setArchived] =useState(news.is_archived);
+    const [archived ,setArchived] =useState(false);
 
     const addArchive =(id)=>{
 
