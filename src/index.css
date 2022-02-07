@@ -1,6 +1,7 @@
 body{
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  
 }
 
 .indximg{
@@ -78,7 +79,7 @@ p{
 {
   margin-top: 30px;
   background-color:#1B2356; 
-  
+ 
   
 
 
@@ -115,10 +116,11 @@ a:hover{
 }
 .news-para{
   margin: 20px 0;
+  text-align: justify;
   
  font-size: 1.4rem;
  line-height: 2rem;
- padding: 10px;
+ /* padding: 10px; */
 }
 .newspage-img{
   display: block;

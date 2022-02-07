@@ -7,7 +7,7 @@ import { useState } from "react";
 const Newscard = ({ news}) => {
     const [archived ,setArchived] =useState(news.is_archived);
     const token=sessionStorage.getItem('token')
-    console.log(news)
+   
 
     const addArchive =(id)=>{
 

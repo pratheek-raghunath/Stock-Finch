@@ -24,15 +24,9 @@ const Newspage = ({newspage}) => {
       };
         const res =await fetch(
           `https://stockfinch.herokuapp.com/api/stock_news/${params.id}`,opts)
-          .then(resp =>{
-            if(resp.status === 400)
-            {
-              alert('Something went wrong');
-            }
-            
-          })
+          
           const news =await res.json()
-    return news     
+          return news     
     }
  
     return (

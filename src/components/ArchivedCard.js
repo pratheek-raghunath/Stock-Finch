@@ -9,7 +9,6 @@ import {LoginContext} from './Context'
 const Newscard = ({ news}) => {
     const [archived ,setArchived] =useState(news.is_archived);
     const token=sessionStorage.getItem('token')
-    console.log(news)
     const {loggedIn,setloggedIn}=useContext(LoginContext)
 
 
