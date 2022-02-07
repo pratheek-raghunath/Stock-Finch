@@ -30,6 +30,7 @@ const Newsfeed = ( ) => {
         }
     const res =await fetch(
         'https://stockfinch.herokuapp.com/api/stock_news',opts)
+        console.log(res)
       const news =await res.json()
       return news 
     
