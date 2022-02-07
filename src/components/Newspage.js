@@ -68,6 +68,7 @@ const Newspage = ({newspage}) => {
         const getNews=async()=>{
           const newsFromServer=await fetchNews()
           setNews(newsFromServer)
+          setArchived(newsFromServer.is_archived)
         }
         getNews()
       },[])
