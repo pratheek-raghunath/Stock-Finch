@@ -28,11 +28,25 @@ const Registration = () => {
      
 };
 fetch("https://stockfinch.herokuapp.com/api/register", opts)
-.then(res => console.log(res))
+      .then(resp =>{
+        if(resp.status === 200)
+        {
+          alert('Successfully Registered'); 
+          navigate('/login') 
+          return resp.json();
+          
+          
+        }
+        if(resp.status === 400)
+        {
+          alert('User already exists'); 
+          return resp.json();
+          
+        }
+        else alert('Error');
+      })
+    }
 
- navigate('/login')
-
-}
   return <section >
   <div className="mask d-flex align-items-center h-100 gradient-custom-3">
     <div className="container h-100">

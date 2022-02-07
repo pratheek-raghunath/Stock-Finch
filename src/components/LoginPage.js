@@ -37,7 +37,7 @@ const LoginPage = () => {
         
         
       }
-      else alert('errrrrrruuuuurr');
+      else alert('Something went wrong');
     })
     .then(data =>{
       sessionStorage.setItem('token',data.access_token)

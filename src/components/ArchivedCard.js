@@ -30,6 +30,14 @@ const Newscard = ({ news}) => {
         };
           fetch('https://stockfinch.herokuapp.com/api/news_archive',opts)
           .then(()=>setArchived(false))
+          .then(resp =>{
+            if(resp.status === 400)
+            {
+              alert('Something went wrong');
+            }
+            
+          })
+
 
 
     }

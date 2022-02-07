@@ -34,6 +34,13 @@ const Archive = ( ) => {
   
     const res =await fetch(
         'https://stockfinch.herokuapp.com/api/news_archive',opts)
+        .then(resp =>{
+          if(resp.status === 400)
+          {
+            alert('Something went wrong');
+          }
+          
+        })
       const news =await res.json()
       return news 
     

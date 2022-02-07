@@ -25,7 +25,15 @@ const Newscard = ({ news}) => {
             
         };
           fetch('https://stockfinch.herokuapp.com/api/news_archive',opts)
+          .then(resp =>{
+            if(resp.status === 400)
+            {
+              alert('Something went wrong');
+            }
+            
+          })
           .then(()=>setArchived(true))
+          
 
     }
     const removeArchive =(id)=>{
@@ -43,6 +51,13 @@ const Newscard = ({ news}) => {
             })
         };
           fetch('https://stockfinch.herokuapp.com/api/news_archive',opts)
+          .then(resp =>{
+            if(resp.status === 400)
+            {
+              alert('Something went wrong');
+            }
+            
+          })
           .then(()=>setArchived(false))
 
 
