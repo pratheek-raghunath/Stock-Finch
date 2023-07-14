@@ -47,11 +47,11 @@ The GNU General Public License is a free, copyleft license for software and othe
 
 ## 📷Screenshots <a name="screenshots"></a>
 
-<img  src="https://github.com/pratheek-raghunath/Stock-Finch/blob/main/ScreenShots/signup.png?raw=true"  alt="stock-finch-image"  width="300"  height="500"  />
+<img  src="https://github.com/pratheek-raghunath/Stock-Finch/blob/main/ScreenShots/signup.png?raw=true"  alt="stock-finch-image"  width="600"  height="500"  />
 
-<img  src="https://github.com/pratheek-raghunath/Stock-Finch/blob/main/ScreenShots/stock_news_1.png?raw=true"  alt="stock-finch-image"  width="300"  height="500"  />
+<img  src="https://github.com/pratheek-raghunath/Stock-Finch/blob/main/ScreenShots/stock_news_1.png?raw=true"  alt="stock-finch-image"  width="600"  height="500"  />
 
-<img  src="https://github.com/pratheek-raghunath/Stock-Finch/blob/main/ScreenShots/stock_news_2.png?raw=true"  alt="stock-finch-image"  width="300"  height="500"  />
+<img  src="https://github.com/pratheek-raghunath/Stock-Finch/blob/main/ScreenShots/stock_news_2.png?raw=true"  alt="stock-finch-image"  width="600"  height="500"  />
 
-<img  src="https://github.com/pratheek-raghunath/Stock-Finch/blob/main/ScreenShots/stock_news_3.png?raw=true"  alt="stock-finch-image"  width="300"  height="500"  />
+<img  src="https://github.com/pratheek-raghunath/Stock-Finch/blob/main/ScreenShots/stock_news_3.png?raw=true"  alt="stock-finch-image"  width="600"  height="500"  />
 
