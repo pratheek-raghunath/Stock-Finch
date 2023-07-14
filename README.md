@@ -1,6 +1,14 @@
-# Stock-Finch  - Stock News Aggregator
+# Stock-Finch  - Stock News Aggregator <a name="about_the_project"></a>
 
 The Stock-Finch Application involves building a web scaping system as one component that that can scrape stock news data from various sources at various times of the day, storing it in the database which can be further processed and displayed to the user. The web scraping system has to robust against website structure changes, website unavailability and website blocking. The Stock-Finch Application also has a web application that provides an intuitive user experience to the user from which the user can view aggregated stock news from various stock news sites and be able to gain an information advantage in the highly competitive stock market. The web application also allows the user to archive news articles which he/she can view later. 
+
+
+## Table of Contents
+* [About the Project](#about_the_project)
+* [Features](#features)
+* [Tech Stack](#tech_stack)
+* [License](#license)
+* [Screenshots](#screenshots)
 
 ## 📌Features <a name="features"></a>
 
@@ -47,11 +55,11 @@ The GNU General Public License is a free, copyleft license for software and othe
 
 ## 📷Screenshots <a name="screenshots"></a>
 
-<img  src="https://github.com/pratheek-raghunath/Stock-Finch/blob/main/ScreenShots/signup.png?raw=true"  alt="stock-finch-image"  width="600"  height="500"  />
+<img  src="https://github.com/pratheek-raghunath/Stock-Finch/blob/main/ScreenShots/signup.png?raw=true"  alt="stock-finch-image"  width="900"  height="500"  />
 
-<img  src="https://github.com/pratheek-raghunath/Stock-Finch/blob/main/ScreenShots/stock_news_1.png?raw=true"  alt="stock-finch-image"  width="600"  height="500"  />
+<img  src="https://github.com/pratheek-raghunath/Stock-Finch/blob/main/ScreenShots/stock_news_1.png?raw=true"  alt="stock-finch-image"  width="900"  height="500"  />
 
-<img  src="https://github.com/pratheek-raghunath/Stock-Finch/blob/main/ScreenShots/stock_news_2.png?raw=true"  alt="stock-finch-image"  width="600"  height="500"  />
+<img  src="https://github.com/pratheek-raghunath/Stock-Finch/blob/main/ScreenShots/stock_news_2.png?raw=true"  alt="stock-finch-image"  width="900"  height="500"  />
 
-<img  src="https://github.com/pratheek-raghunath/Stock-Finch/blob/main/ScreenShots/stock_news_3.png?raw=true"  alt="stock-finch-image"  width="600"  height="500"  />
+<img  src="https://github.com/pratheek-raghunath/Stock-Finch/blob/main/ScreenShots/stock_news_3.png?raw=true"  alt="stock-finch-image"  width="900"  height="500"  />
 
