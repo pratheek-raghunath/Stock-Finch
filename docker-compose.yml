@@ -1,0 +1,51 @@
+version: "3.7"
+services:
+  xtractor:
+    build: ./xtractor
+    volumes:
+      - ./xtractor/src:/app/
+    command:
+      tail -f /dev/null
+    env_file:
+      - ./config/stockfinch-config.env
+    depends_on:
+      - postgresql
+    networks:
+      - finch_net
+
+  api:
+    build: ./api
+    ports:
+      - "5000:5000"
+    command: 
+      python src/app.py
+    volumes:
+      - ./api/src:/app/src
+      - ./api/build:/app/build
+    env_file:
+      - ./config/stockfinch-config.env
+    depends_on:
+      - postgresql
+    networks:
+      - finch_net
+
+  postgresql:
+    container_name: stockfinch_db
+    image: postgres:latest
+    working_dir: ${PWD}
+    env_file:
+      - ./config/stockfinch-config.env
+    volumes:
+      #- ${PWD}/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ${PWD}/db/.data/psql:/var/lib/postgresql/data/
+    ports:
+      - 5432:5432
+    networks:
+      - finch_net
+
+networks:
+  finch_net:
+
+
+    
+    

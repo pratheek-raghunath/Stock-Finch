@@ -1,7 +1,7 @@
 from core.xtractor import BaseExtractor
 import time
 import core.utils
-from entity.news import News
+from entity.stock_news import StockNews
 
 class EconomicTimes(BaseExtractor):
 
@@ -27,8 +27,11 @@ class EconomicTimes(BaseExtractor):
             news_soup = self.get_soup(news_link)
             
             try:
-                if news_soup.find(class_='ePrime'):
-                    print('Paywall: ' + news_link)
+                try:
+                    publish_date = ''.join(news_soup.find('time').text.split()[2:-1])
+                    publish_date = core.utils.get_datetime(publish_date, ['%b%d,%Y,%I:%M%p'], news_link)
+                except Exception:
+                    print('Paywall')
                     continue
 
                 headline = news_soup.find(class_="artTitle").text
@@ -41,7 +44,7 @@ class EconomicTimes(BaseExtractor):
                 
                 image_url = news_soup.find(class_='artImg').find('img')['src']
                 
-                news = News(db, headline, description, source, news_link, publish_date, image_url)
+                news = StockNews(db, headline, description, source, news_link, publish_date, image_url)
                 news.save()
             except (AttributeError, KeyError, TypeError) as inst:
                 raise Exception(f'Site Structure Changed ---  url: {news_link} --- {str(inst)}')

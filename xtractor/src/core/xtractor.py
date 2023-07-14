@@ -35,20 +35,25 @@ class BaseExtractor(ABC):
     def getScrapperName(self):
         return self.__class__.__name__
 
-    def get_page(self, url: str) -> requests.models.Response:
-        num_retries = 3
+    def get_page(self, url: str, headers: dict=None) -> requests.models.Response:
+        if headers is None:
+            headers = {
+                "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36"
+            }        
+
+        num_retries = 4
 
         for i in range(num_retries):
             try:
-                page = requests.get(url)
+                page = requests.get(url, headers=headers)
                 page.raise_for_status()
-            except requests.HTTPError() as e:
-                raise e
-            except requests.RequestException as e:
+            except Exception:
+                print('Attempt No: ' + str(i))
                 if i == num_retries - 1:
-                    raise e
+                    raise
                 else:
-                    time.sleep(10)
+                    print('Retrying after ' + str(60 * (num_retries ** i)) + ' seconds')
+                    time.sleep(60 * (num_retries ** i))
             else:
                 return page
 

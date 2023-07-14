@@ -1,2 +1,14 @@
-# Stock-Finch
-The project involves three parts - Scraping System, Backend and Client Side Web Application.  A scraping framework is to be developed that is capable of scraping and processing stock news content from multiple news websites, social media websites etc in a robust, performant and scalable manner. The Backend system is tasked with serving data to the client applications and handling other essential server side tasks like User Authentication.  The client side web application provides the user with an intuitive user experience to interact with the system and allows the user to perform various tasks like get alerts regarding certain stocks, view and archive stock news.
+# Stock News Aggregator
+
+This project is a stock news aggregator that has a scraping system to scrape stock news and company data from various sites and a web application that displays the scraped data.
+
+Technologies and Tools Used: Python, Flask, BeautifulSoup, React, PostgreSQL, Docker, Heroku, Postman, DBeaver
+
+## Features:
+
+*  Scraping system using BeautifulSoup, requests, psycopg2 
+*  REST api to serve data using Flask
+* Client SPA using React
+* JWT Authentication
+* Full Text Search on company data using PostgreSQL 
+* Containerization using docker and docker-compose
